@@ -11,7 +11,14 @@ const path = require('path');
 const cors = require('cors');
 
 // database setup
-
+const mongooseOptions = {
+  promiseLibrary: bluebird,
+  useNewUrlParser: true
+};
+const mongoDB = "mongodb://" + process.env.DB_USER + ":" + process.env.DB_PASSWORD + "@ds029051.mlab.com:29051/battleship";
+mongoose.connect(mongoDB, mongooseOptions);
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 // app setup
 const app = express();
